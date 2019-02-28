@@ -1,0 +1,97 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main()
+{
+    string s1,s2;
+    cin>>s1>>s2;
+    vector <int>ss1;
+    vector <int>ss2;
+    
+    vector <int>result;
+    
+    int in = 0;
+    
+    for(int i = 0;i<s1.length();i++)
+    {
+        ss1.push_back(s1[i]-'0');
+    }
+    for(int i = 0;i<s2.length();i++)
+    {
+        ss2.push_back(s2[i]-'0');
+    }
+    if(ss1.size()>ss2.size())
+    {
+        for(int i = ss1.size()-1,j=ss2.size()-1;j>=0;j--,i--)
+        {
+            int v=ss1[i]+ss2[j]+in;
+            if(v>=10)
+            {
+                result.push_back(v%10);
+                in=v/10;
+            }
+            else
+            {
+                result.push_back(v);
+                in = 0;
+            }
+        }
+        for(int i = ss1.size()-ss2.size()-1;i>=0;i--)
+        {
+            result.push_back((ss1[i]+in)%10);
+            in = (ss1[i]+in)/10;
+        }
+    }
+    if(ss1.size()<ss2.size())
+    {
+        for(int i = ss1.size()-1,j=ss2.size()-1;i>=0;j--,i--)
+        {
+            int v=ss1[i]+ss2[j]+in;
+            if(v>=10)
+            {
+                result.push_back(v%10);
+                in=v/10;
+            }
+            else
+            {
+                result.push_back(v);
+                in = 0;
+            }
+        }
+        for(int i = ss2.size()-ss1.size()-1;i>=0;i--)
+        {
+            result.push_back((ss2[i]+in)%10);
+            in = (ss2[i]+in)/10;
+        }
+    }
+    if(ss1.size()==ss2.size())
+    {
+        for(int i = ss1.size()-1;i>=0;i--)
+        {
+            int v=ss1[i]+ss2[i]+in;
+            if(v>=10)
+            {
+                result.push_back(v%10);
+                in=v/10;
+            }
+            else
+            {
+                result.push_back(v);
+                in = 0;
+            }
+        }
+        if(in!=0)
+        {
+            result.push_back(in);
+        }
+    }
+    for(int i = result.size()-1;i>=0;i--)
+    {
+        cout<<result[i];
+    }
+    cout<<endl;
+    return 0;
+    
+}
+
