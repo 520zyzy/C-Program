@@ -1,0 +1,22 @@
+//这个视频我们讲1000以内完数的编写
+//完数指6 = 1+2+3，也就是因子数相加等于数的本身
+#include<iostream>
+using namespace std;
+int main()
+{
+    int sum = 0;
+    for (int i = 1; i<=1000; i++) {
+        for (int j = 1; j<i; j++) {
+            if (i%j==0) {
+                sum+=j;
+            }
+            
+        }
+        if(sum==i)
+        {
+            cout<<i<<endl;
+        }
+        sum = 0;
+    }
+    return 0;
+}
