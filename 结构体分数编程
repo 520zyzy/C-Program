@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<math.h>
+
+struct student{
+	int sno;
+	char name[20];
+	float score[3];
+	float total;
+	int fam;
+}a[100];
+int main()
+{
+	FILE *fp = fopen("E:\\student.txt","w+");
+	int n = 0,i,j = 0;
+	printf("«Î ‰»Î—ß…˙ ˝¡ø£∫\n"); 
+	scanf("%d",&n);
+	void sort(n);
+	for(i = 0;i<n;i++)
+	{
+		a[i].sno = i+1;
+		scanf("%s %f %f %f",&a[i].name,&a[i].score[0],&a[i].score[1],&a[i].score[2]);
+		a[i].total = a[i].score[0]+a[i].score[1]+a[i].score[2];
+	}
+	sort(n);
+	printf("—ß ∫≈   –’ √˚        ˝ —ß         ”Ô Œƒ         ”¢ ”Ô    ◊‹ ∑÷     ≈≈ √˚\n");
+	fprintf(fp,"—ß ∫≈   –’ √˚        ˝ —ß         ”Ô Œƒ         ”¢ ”Ô    ◊‹ ∑÷     ≈≈ √˚\n");
+	for(i=0;i<n;i++)
+	{
+		printf("%-4d  %4s",a[i].sno,a[i].name);
+		fprintf(fp,"%-4d  %4s",a[i].sno,a[i].name);
+		for(j = 0;j<3;j++)
+		{
+			printf("%14.1f",a[i].score[j]);
+			fprintf(fp,"%14.1f",a[i].score[j]);
+			
+		}
+		printf("%8.1f %8d\n",a[i].total,a[i].fam);
+		fprintf(fp,"%8.1f %8d\n",a[i].total,a[i].fam);
+	}
+	fclose(fp);
+	return 0;
+}
+void sort(int n)
+{
+	int i,j,k = 1,tem;
+	for(i = 0;i<n-1;i++)
+	{
+		tem = i;
+		for(j = i+1;j<n;j++)
+		{
+			if(a[tem].total<=a[j].total)
+			{
+				tem = j;
+			}
+		}
+		if(tem!=i)
+		{
+			struct student temp = a[tem];
+			a[tem] = a[i];
+			a[i] = temp;
+		}
+	}
+	a[0].fam = k;
+	for(i = 1;i<n;i++)
+	{
+		if(a[i].total==a[i-1].total)
+		{
+			a[i].fam = a[i-1].fam;
+		}
+		else
+		{
+			a[i].fam = i+1;
+		}
+	}
+}
